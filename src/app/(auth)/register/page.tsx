@@ -14,21 +14,22 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signInSchema } from "@/schema/signInSchema";
+import { signUpSchema } from "@/schema/signUpSchema";
 import Link from "next/link";
 
-export default function Login() {
+export default function Register() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const form = useForm<z.infer<typeof signInSchema>>({
-    resolver: zodResolver(signInSchema),
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
     },
   });
 
-  const handleFormSubmit = async (data: z.infer<typeof signInSchema>) => {
+  const handleFormSubmit = async (data: z.infer<typeof signUpSchema>) => {
     setIsSubmitting(true);
     console.log("handeling submit");
     setIsSubmitting(false);
@@ -47,6 +48,25 @@ export default function Login() {
             onSubmit={form.handleSubmit(handleFormSubmit)}
             className="space-y-4"
           >
+            {/* --------Name Field--------- */}
+
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input
+                      className="bg-[#EBEBEB]"
+                      placeholder="Full name"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             {/* --------Email Field--------- */}
 
             <FormField
@@ -95,15 +115,15 @@ export default function Login() {
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait
                 </>
               ) : (
-                "Login"
+                "Sign Up"
               )}
             </Button>
           </form>
         </Form>
         <div className="text-center text-neutral-600 text-sm max-w-sm dark:text-neutral-300">
-          {"Don't have account? Create a "}
-          <Link className="text-blue-500" href="/register">
-            new account
+          {"Already have an account? "}
+          <Link className="text-blue-500" href="/">
+            Log in
           </Link>
         </div>
       </div>
