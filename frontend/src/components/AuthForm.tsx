@@ -85,7 +85,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
                   <FormItem>
                     <FormControl>
                       <Input
-                        className="bg-[#EBEBEB] !ring-0"
+                        className="bg-[#EBEBEB] !ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                         placeholder="Full name"
                         {...field}
                       />
@@ -104,7 +104,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
                 <FormItem>
                   <FormControl>
                     <Input
-                      className="bg-[#EBEBEB] !ring-0"
+                      className="bg-[#EBEBEB] !ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                       placeholder="Your email"
                       {...field}
                     />
@@ -123,7 +123,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
                 <FormItem>
                   <FormControl>
                     <PasswordInput
-                      className="bg-[#EBEBEB] !ring-0"
+                      className="bg-[#EBEBEB] !ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
                       placeholder="Password"
                       {...field}
                     />

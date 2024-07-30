@@ -1,16 +1,12 @@
-import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import TaskBoard from "@/components/TaskBoard";
+import TaskArea from "@/components/TaskArea";
 
 const Dashboard = () => {
   return (
     <div>
-      <div className="flex">
+      <div className="flex h-screen w-full">
         <Sidebar />
-        <div className="flex-1 p-6 bg-gray-50">
-          <Header />
-          <TaskBoard />
-        </div>
+        <TaskArea />
       </div>
     </div>
   );

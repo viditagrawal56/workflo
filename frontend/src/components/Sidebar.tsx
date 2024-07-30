@@ -16,7 +16,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import SidebarItem, { SidebarItemProps } from "./SidebarItems";
 
 const Sidebar = () => {
-  const items: Array<SidebarItemProps> = [
+  const items: SidebarItemProps[] = [
     { Icon: House, label: "Home", isActive: true },
     { Icon: SquareKanban, label: "Boards", isActive: false },
     { Icon: Settings, label: "Settings", isActive: false },

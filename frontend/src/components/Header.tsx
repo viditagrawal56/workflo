@@ -1,24 +1,50 @@
-import React from "react";
+import { CircleHelp } from "lucide-react";
+import ToolBar from "./ToolBar";
+import HeaderCard, { IHeaderCards } from "./HeaderCard";
+import { AccessCardIcon, IntroCardIcon, ShareCardIcon } from "./icons";
 
 const Header = () => {
+  const items: IHeaderCards[] = [
+    {
+      title: "Introducing tags",
+      description:
+        "Easily categorize and find your notes by adding tags. Keep your workspace clutter-free and efficient.",
+      icon: IntroCardIcon,
+    },
+    {
+      title: "Share Notes Instantly",
+      description:
+        "Effortlessly share your notes with others via email or link. Enhance collaboration with quick sharing options.",
+      icon: ShareCardIcon,
+    },
+    {
+      title: "Access Anywhere",
+      description:
+        "Sync your notes across all devices. Stay productive whether you're on your phone, tablet, or computer.",
+      icon: AccessCardIcon,
+    },
+  ];
   return (
-    <div className="flex justify-between items-center py-4 px-6 bg-white shadow-md">
-      <div>
-        <h1 className="text-2xl font-bold">Good morning, Joe!</h1>
-      </div>
-      <div className="flex items-center space-x-4">
-        <button className="bg-purple-600 text-white px-4 py-2 rounded">
-          Create new task
-        </button>
-        <div className="flex items-center space-x-2">
-          <img
-            src="/path/to/avatar.jpg"
-            alt="Joe Gardner"
-            className="w-10 h-10 rounded-full"
-          />
-          <span>Joe Gardner</span>
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center justify-between">
+        <h1 className="text-4xl font-bold">Good morning, Joe!</h1>
+        <div className="flex font-medium justify-center items-center gap-2">
+          Help & feedback <CircleHelp />
         </div>
       </div>
+      <div className="flex gap-3">
+        {items.map((item) => {
+          return (
+            <HeaderCard
+              key={item.title}
+              title={item.title}
+              description={item.description}
+              icon={item.icon}
+            />
+          );
+        })}
+      </div>
+      <ToolBar />
     </div>
   );
 };
