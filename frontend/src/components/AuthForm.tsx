@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuth } from "../context/AuthContext";
 import { signup, login } from "../lib/api";
 import {
   loginSchema,
@@ -24,6 +23,8 @@ import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
 import PasswordInput from "./PasswordInput";
+import { useDispatch } from "react-redux";
+import { updateUser } from "@/store/slices/userSlice";
 
 interface AuthFormProps {
   type: "signup" | "login";
@@ -31,9 +32,8 @@ interface AuthFormProps {
 
 const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const dispatch = useDispatch();
   const router = useRouter();
-  const { login: authLogin } = useAuth();
 
   const form = useForm<LoginInput | SignupInput>({
     resolver: zodResolver(type === "signup" ? signupSchema : loginSchema),
@@ -47,20 +47,13 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
     setIsSubmitting(true);
     try {
       if (type === "signup") {
-        const { token, name } = await signup(
-          (data as SignupInput).name,
-          (data as SignupInput).email,
-          (data as SignupInput).password
-        );
-        authLogin(token, name);
+        await signup(data as SignupInput);
+        router.push("/");
       } else {
-        const { token, name } = await login(
-          (data as LoginInput).email,
-          (data as LoginInput).password
-        );
-        authLogin(token, name);
+        const response = await login(data as LoginInput);
+        dispatch(updateUser(response.user));
+        router.push("/dashboard");
       }
-      router.push("/dashboard");
     } catch (error) {
       console.error("Authentication failed:", error);
     }

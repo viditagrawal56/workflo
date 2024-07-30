@@ -1,10 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 
-// interface JwtPayload {
-//   userId?: string;
-// }
-
 export interface AuthRequest extends Request {
   userId?: string;
 }
@@ -13,15 +9,12 @@ export const authMiddleware = (
   req: AuthRequest,
   res: Response,
   next: NextFunction
-): void => {
-  const authHeader = req.headers.authorization;
+) => {
+  const token = req.cookies.token;
 
-  if (!authHeader) {
-    res.status(401).json({ message: "No token provided" });
-    return;
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
   }
-
-  const token = authHeader.split(" ")[1];
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
