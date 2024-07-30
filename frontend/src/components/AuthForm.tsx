@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
+import PasswordInput from "./PasswordInput";
 
 interface AuthFormProps {
   type: "signup" | "login";
@@ -69,15 +70,13 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
   };
 
   return (
-    <div className="flex justify-center min-h-screen bg-gradient-to-b from-white to-[#AFA3FF]">
-      <div className="w-full max-w-md mt-32 h-96 p-8 space-y-8 bg-[#F7F7F7] rounded-lg border-[#CECECE] border-[1px]">
-        <div className="text-center">
-          <h1 className="text-2xl font-extrabold tracking-tight lg:text-3xl mb-4">
-            Welcome to <span className="text-[#4534AC]">Workflo</span>!
-          </h1>
-        </div>
+    <div className="flex justify-center items-center w-full h-screen bg-gradient-to-b from-white to-[#AFA3FF]">
+      <div className="w-[450px] mb-32 p-10 rounded-lg bg-[#F7F7F7] border-[#CECECE] border-[1px]">
+        <h1 className="text-2xl text-center font-extrabold tracking-tight lg:text-3xl mb-4">
+          Welcome to <span className="text-[#4534AC]">Workflo</span>!
+        </h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             {/* --------Name Field--------- */}
 
             {type === "signup" && (
@@ -88,7 +87,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
                   <FormItem>
                     <FormControl>
                       <Input
-                        className="bg-[#EBEBEB]"
+                        className="bg-[#EBEBEB] !ring-0"
                         placeholder="Full name"
                         {...field}
                       />
@@ -107,7 +106,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
                 <FormItem>
                   <FormControl>
                     <Input
-                      className="bg-[#EBEBEB]"
+                      className="bg-[#EBEBEB] !ring-0"
                       placeholder="Your email"
                       {...field}
                     />
@@ -125,9 +124,8 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      className="bg-[#EBEBEB]"
-                      type="password"
+                    <PasswordInput
+                      className="bg-[#EBEBEB] !ring-0"
                       placeholder="Password"
                       {...field}
                     />
@@ -137,7 +135,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
               )}
             />
             <Button
-              className="w-full bg-gradient-to-b from-[#4C38C2] to-[#2F2188]"
+              className="w-full bg-gradient-to-b from-[#4C38C2] to-[#2F2188] !ring-0"
               type="submit"
               disabled={isSubmitting}
             >
@@ -153,7 +151,7 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
             </Button>
           </form>
         </Form>
-        <div className="text-center text-neutral-600 text-sm max-w-sm dark:text-neutral-300">
+        <div className="text-center mt-3 text-neutral-600 text-sm max-w-sm dark:text-neutral-300">
           {type == "signup"
             ? "Already have an account? "
             : "Don't have account? Create a "}
