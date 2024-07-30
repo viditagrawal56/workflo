@@ -7,7 +7,6 @@ const api = axios.create({
 
 api.interceptors.request.use((config) => {
   const token = Cookies.get("token");
-  console.log("retrieved: ", token);
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
@@ -25,8 +24,6 @@ export const signup = async (name: string, email: string, password: string) => {
 
 export const login = async (email: string, password: string) => {
   const response = await api.post("/api/auth/login", { email, password });
-  console.log("API login response:", response.data);
-
   return response.data;
 };
 

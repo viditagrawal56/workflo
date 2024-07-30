@@ -54,12 +54,10 @@ const AuthForm: React.FC<AuthFormProps> = ({ type }) => {
         );
         authLogin(token, name);
       } else {
-        console.log("Attempting login...");
         const { token, name } = await login(
           (data as LoginInput).email,
           (data as LoginInput).password
         );
-        console.log("Calling authLogin with:", token, name);
         authLogin(token, name);
       }
       router.push("/dashboard");

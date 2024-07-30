@@ -31,12 +31,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
 
   const login = (token: string, name: string) => {
-    console.log("AuthContext login called with:", token, name);
     Cookies.set("token", token, { expires: 1 });
     Cookies.set("userName", name, { expires: 1 });
     setIsAuthenticated(true);
     setUserName(name);
-    console.log("Cookies set:", Cookies.get("token"), Cookies.get("userName"));
   };
 
   const logout = () => {
