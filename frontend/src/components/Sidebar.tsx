@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { Button } from "./ui/button";
 import {
@@ -14,8 +16,11 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import SidebarItem, { SidebarItemProps } from "./SidebarItems";
+import { useAppSelector } from "@/store/hooks";
+import CreateTaskBar from "./CreateTaskBar";
 
 const Sidebar = () => {
+  const { user } = useAppSelector((state) => state.userSlice);
   const items: SidebarItemProps[] = [
     { Icon: House, label: "Home", isActive: true },
     { Icon: SquareKanban, label: "Boards", isActive: false },
@@ -31,11 +36,13 @@ const Sidebar = () => {
           <Avatar className="size-8">
             <AvatarImage
               className="shadow-md"
-              src="https://github.com/viditagrawal56.png"
+              src={user?.profilePicture || ""}
             />
-            <AvatarFallback>VA</AvatarFallback>
+            <AvatarFallback className="capitalize">
+              {user?.name[0]}
+            </AvatarFallback>
           </Avatar>
-          <h2 className="font-semibold">Joe Gardner</h2>
+          <h2 className="font-semibold capitalize">{user?.name}</h2>
         </div>
 
         <div className="flex text-[#797979] justify-between items-center">
@@ -59,11 +66,7 @@ const Sidebar = () => {
             />
           ))}
         </ul>
-
-        <Button className="w-full bg-gradient-to-b from-[#4C38C2] to-[#2F2188] flex items-center justify-center gap-2">
-          Create new task
-          <CirclePlus />
-        </Button>
+        <CreateTaskBar triggerButtonName="Create new Task" />
       </div>
       <div className=" p-2 bg-[#F4F4F4] text-[#797979] rounded-md flex gap-2 cursor-pointer">
         <div className="flex justify-center items-center">

@@ -1,5 +1,5 @@
+import CreateTaskBar from "./CreateTaskBar";
 import ToolItem, { ITool } from "./ToolItem";
-import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import {
   CirclePlus,
@@ -53,10 +53,7 @@ const ToolBar = () => {
           })}
         </div>
         <div>
-          <Button className="w-full bg-gradient-to-b from-[#4C38C2] to-[#2F2188] flex items-center justify-center gap-2">
-            Create new
-            <CirclePlus />
-          </Button>
+          <CreateTaskBar triggerButtonName="Create new" />
         </div>
       </div>
     </div>

@@ -11,6 +11,6 @@ router.use(authMiddleware);
 
 router.post("/createTask", createTask);
 router.get("/getTasks", getTasks);
-router.post("/updateTask/:id", updateTask);
+router.put("/updateTask/:id", updateTask);
 
 export default router;

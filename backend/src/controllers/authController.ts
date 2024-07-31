@@ -48,7 +48,7 @@ export const login = async (req: Request, res: Response) => {
       expiresIn: "1h",
     });
 
-    res.cookie("myToken", token, {
+    res.cookie("token", token, {
       path: "/",
       sameSite: "none",
       httpOnly: true,

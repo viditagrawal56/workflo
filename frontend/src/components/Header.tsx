@@ -1,9 +1,14 @@
+"use client";
+
 import { CircleHelp } from "lucide-react";
 import ToolBar from "./ToolBar";
 import HeaderCard, { IHeaderCards } from "./HeaderCard";
 import { AccessCardIcon, IntroCardIcon, ShareCardIcon } from "./icons";
+import { useAppSelector } from "@/store/hooks";
 
 const Header = () => {
+  const { user } = useAppSelector((state) => state.userSlice);
+
   const items: IHeaderCards[] = [
     {
       title: "Introducing tags",
@@ -27,7 +32,7 @@ const Header = () => {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-4xl font-bold">Good morning, Joe!</h1>
+        <h1 className="text-4xl font-bold">Good morning, {user?.name}</h1>
         <div className="flex font-medium justify-center items-center gap-2">
           Help & feedback <CircleHelp />
         </div>

@@ -27,7 +27,7 @@ const TaskSchema: Schema = new Schema<ITaskSchema>({
   },
   priority: {
     type: String,
-    enum: ["low", "medium", "urgent"],
+    enum: ["Low", "Medium", "Urgent"],
   },
   deadline: {
     type: String,
